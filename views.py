@@ -19,12 +19,12 @@ class AddCost(AbstractView):
 
     def draw(self):
         print(AddCost.LABEL)
-        title = input("Tytuł: ")
+        name = input("Tytuł: ")
         category_name = input("Kategoria: ")
         amount = float(input("Wartość: "))
 
-        category = self.repositories['category'].get_by_name(category_name)
-        self.repositories['entry'].save(title, category, amount)
+        category_id, name = self.repositories['category'].get_by_name(category_name)
+        self.repositories['entry'].save(name, category_id, amount * -1)
 
 
 class ListCost(AbstractView):
