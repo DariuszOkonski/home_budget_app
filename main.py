@@ -8,8 +8,7 @@ class Application:
 
         option = menu.get_screen()
 
-
-
+        option.draw()
 
 
 if __name__ == "__main__":

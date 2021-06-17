@@ -12,7 +12,7 @@ class AddCost(AbstractView):
     LABEL = 'Dodaj koszt'
 
     def draw(self):
-        pass
+        print(AddCost.LABEL)
 
 
 class ListCost(AbstractView):
@@ -20,7 +20,7 @@ class ListCost(AbstractView):
     LABEL = 'Wypisz koszty'
 
     def draw(self):
-        pass
+        print(ListCost.LABEL)
 
 
 class AddIncome(AbstractView):
@@ -28,7 +28,7 @@ class AddIncome(AbstractView):
     LABEL = 'Dodaj przychody'
 
     def draw(self):
-        pass
+        print(AddIncome.LABEL)
 
 
 class ListIncomes(AbstractView):
@@ -36,7 +36,7 @@ class ListIncomes(AbstractView):
     LABEL = 'Wypisz przychody'
 
     def draw(self):
-        pass
+        print(ListIncomes.LABEL)
 
 
 class MainMenu(AbstractView):
