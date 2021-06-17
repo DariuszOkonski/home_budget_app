@@ -31,5 +31,8 @@ class MainMenu:
         for shortcut, screen in MainMenu.OPTIONS.items():
             print(f'[{shortcut}] - {screen.LABEL}')
 
-        option = input('Wybierz opcję: ')
-        print(option)
+        option = None
+        while option not in MainMenu.OPTIONS:
+            option = input('Wybierz opcję: ')
+
+        print(MainMenu.OPTIONS[option])
