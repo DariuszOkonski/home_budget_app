@@ -2,9 +2,15 @@ from abc import ABC, abstractmethod
 
 
 class AbstractView(ABC):
+    def __init__(self):
+        self.repositories = {}
+
     @abstractmethod
     def draw(self):
         pass
+
+    def set_repository(self, name, repository):
+        self.repositories[name] = repository
 
 
 class AddCost(AbstractView):
@@ -13,6 +19,12 @@ class AddCost(AbstractView):
 
     def draw(self):
         print(AddCost.LABEL)
+        title = input("Tytuł: ")
+        category_name = input("Kategoria: ")
+        amount = float(input("Wartość: "))
+
+        category = self.repositories['category'].get_by_name(category_name)
+        self.repositories['entry'].save(title, category, amount)
 
 
 class ListCost(AbstractView):

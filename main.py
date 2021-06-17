@@ -6,9 +6,10 @@ class Application:
         menu = MainMenu();
         menu.draw()
 
-        option = menu.get_screen()
-
-        option.draw()
+        screen = menu.get_screen()
+        screen.set_repository('category', category_repository)
+        screen.set_repository('entry', entry_repository)
+        screen.draw()
 
 
 if __name__ == "__main__":
