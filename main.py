@@ -6,6 +6,11 @@ class Application:
         menu = MainMenu();
         menu.draw()
 
+        option = menu.get_screen()
+
+
+
+
 
 if __name__ == "__main__":
     Application.main()

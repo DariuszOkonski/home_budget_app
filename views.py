@@ -1,24 +1,45 @@
-class AddCost:
+from abc import ABC, abstractmethod
+
+
+class AbstractView(ABC):
+    @abstractmethod
+    def draw(self):
+        pass
+
+
+class AddCost(AbstractView):
     SHORTCUT = 'dk'
     LABEL = 'Dodaj koszt'
 
+    def draw(self):
+        pass
 
-class ListCost:
+
+class ListCost(AbstractView):
     SHORTCUT = 'wk'
     LABEL = 'Wypisz koszty'
 
+    def draw(self):
+        pass
 
-class AddIncome:
+
+class AddIncome(AbstractView):
     SHORTCUT = 'dp'
     LABEL = 'Dodaj przychody'
 
+    def draw(self):
+        pass
 
-class ListIncomes:
+
+class ListIncomes(AbstractView):
     SHORTCUT = 'wp'
     LABEL = 'Wypisz przychody'
 
+    def draw(self):
+        pass
 
-class MainMenu:
+
+class MainMenu(AbstractView):
     OPTIONS = {
         AddCost.SHORTCUT: AddCost(),
         ListCost.SHORTCUT: ListCost(),
@@ -26,13 +47,14 @@ class MainMenu:
         ListIncomes.SHORTCUT: ListIncomes()
     }
 
-    def draw(self):
-        print('Powiedz co chcesz zrobić?: ')
-        for shortcut, screen in MainMenu.OPTIONS.items():
-            print(f'[{shortcut}] - {screen.LABEL}')
-
+    def get_screen(self):
         option = None
         while option not in MainMenu.OPTIONS:
             option = input('Wybierz opcję: ')
 
-        print(MainMenu.OPTIONS[option])
+        return MainMenu.OPTIONS[option]
+
+    def draw(self):
+        print('Powiedz co chcesz zrobić?: ')
+        for shortcut, screen in MainMenu.OPTIONS.items():
+            print(f'[{shortcut}] - {screen.LABEL}')
