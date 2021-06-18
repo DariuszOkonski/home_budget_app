@@ -8,5 +8,9 @@ CREATE TABLE entry (
 	category_id INTEGER,
 	name TEXT,
 	amount FLOAT,
-	created_at TIMESTAMP CURRENT_TIMESTAMP
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+DROP TABLE entry;
+
+SELECT * FROM entry;

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from terminaltables import AsciiTable
 
 class AbstractView(ABC):
     def __init__(self):
@@ -38,6 +39,12 @@ class ListCost(AbstractView):
 
     def draw(self):
         print(ListCost.LABEL)
+        rows = [['data dodania', 'kwota', 'kategoria']]
+        for _, created_at, amount, category in self.repositories['entry'].get_costs():
+            rows.append([created_at, amount, category])
+
+        table = AsciiTable(rows);
+        print(table.table)
 
 
 class AddIncome(AbstractView):
@@ -55,13 +62,20 @@ class ListIncomes(AbstractView):
     def draw(self):
         print(ListIncomes.LABEL)
 
+class Report(AbstractView):
+    SHORTCUT = 'r'
+    LABEL = 'Raporty'
+
+    def draw(self):
+        print(Report.LABEL)
 
 class MainMenu(AbstractView):
     OPTIONS = {
         AddCost.SHORTCUT: AddCost(),
         ListCost.SHORTCUT: ListCost(),
         AddIncome.SHORTCUT: AddIncome(),
-        ListIncomes.SHORTCUT: ListIncomes()
+        ListIncomes.SHORTCUT: ListIncomes(),
+        Report.SHORTCUT: Report()
     }
 
     def get_screen(self):
