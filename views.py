@@ -26,7 +26,7 @@ class AddCost(AbstractView):
         while not found_category:
             try:
                 category_name = input("Kategoria: ")
-                category_id, _ = self.repositories['category'].get_by_name(category_name)
+                category_id, _ = self.repositories['category'].get_by_category(category_name)
                 found_category = True
             except TypeError:
                 found_category = False
@@ -67,7 +67,16 @@ class Report(AbstractView):
     LABEL = 'Raporty'
 
     def draw(self):
-        print(Report.LABEL)
+        repository = self.repositories['report']
+        quantity, saldo = repository.get_saldo()
+        print(f'Ilosc operacji: {quantity}')
+        print(f'Saldo: {saldo}')
+
+        rows = [['Nazwa', 'Ilosc', 'Saldo']]
+        rows += [[category_name, quantity, saldo]for category_name, quantity, saldo in repository.get_by_category()]
+
+        table = AsciiTable(rows)
+        print(table.table)
 
 class MainMenu(AbstractView):
     OPTIONS = {
