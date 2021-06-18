@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-
 class AbstractView(ABC):
     def __init__(self):
         self.repositories = {}
@@ -20,12 +19,18 @@ class AddCost(AbstractView):
     def draw(self):
         print(AddCost.LABEL)
         name = input("Tytuł: ")
-        category_name = input("Kategoria: ")
         amount = float(input("Wartość: "))
+        found_category = False
 
-        category_id, name = self.repositories['category'].get_by_name(category_name)
+        while not found_category:
+            try:
+                category_name = input("Kategoria: ")
+                category_id, _ = self.repositories['category'].get_by_name(category_name)
+                found_category = True
+            except TypeError:
+                found_category = False
+
         self.repositories['entry'].save(name, category_id, amount * -1)
-
 
 class ListCost(AbstractView):
     SHORTCUT = 'wk'
